@@ -29,22 +29,18 @@ cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
-        working-directory: portfolio-astro
+        
 
       - name: Lint (if configured)
         run: npm run lint
-        working-directory: portfolio-astro
         continue-on-error: true
 
       - name: TypeScript type check
         run: npx tsc -p tsconfig.json --noEmit
-        working-directory: portfolio-astro
 
       - name: Vitest tests
         run: npm test
-        working-directory: portfolio-astro
 
       - name: Build Astro site
         run: npm run build
-        working-directory: portfolio-astro
 
