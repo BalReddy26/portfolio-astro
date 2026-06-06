@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Projects — Bal Reddy';
+const description = 'Three SOC-focused case studies: alert investigation, vulnerability assessment dashboards, and security log analysis.';
+
+const projects = [
+  {
+    title: 'SOC Alert Investigation Lab',
+    problem:
+      'How do you move from raw SIEM alerts to a confident understanding of what happened, what the impact might be, and what to do next?',
+    approach:
+      'Build a structured triage flow: validate the alert signal, enrich with context, identify indicators of compromise, and produce a clear investigation summary. Focus on repeatable steps that a SOC analyst can follow under time pressure.',
+    technologies: ['Threat triage workflow', 'Alert context enrichment', 'Evidence-led investigation patterns', 'Incident reconstruction (concepts)'],
+    outcome:
+      'A repeatable investigation process that turns alerts into documented findings, including severity reasoning and next-step recommendations.',
+    lessons:
+      'Good SOC investigations depend on consistent evidence handling, clear assumptions, and tight communication. Correlation is only useful when the evidence is aligned with the alert narrative.',
+    improve:
+      'Add deeper correlation logic and measurable detection coverage metrics. Expand the template into a full case-study report format with stronger evidence provenance.'
+  },
+  {
+    title: 'Vulnerability Assessment Dashboard',
+    problem:
+      'How can teams prioritize vulnerabilities effectively when you have many findings but limited time to remediate?',
+    approach:
+      'Design a dashboard concept around risk prioritization: summarize exposure, highlight critical paths, support remediation tracking, and provide actionable insights for security and operations stakeholders.',
+    technologies: ['Risk prioritization approach', 'Actionable reporting UI', 'Remediation planning (concepts)', 'Clear stakeholder summaries'],
+    outcome:
+      'A decision-focused dashboard structure that helps reduce noise and directs attention toward the highest-impact remediation tasks.',
+    lessons:
+      'Dashboards are only useful if they explain “why” a vulnerability matters. Present risk in a way that supports planning, not just viewing.',
+    improve:
+      'Integrate more realistic metrics (e.g., asset criticality weighting) and add an exportable reporting workflow for management-ready summaries.'
+  },
+  {
+    title: 'Security Log Analysis Platform',
+    problem:
+      'How can analysts efficiently review structured logs to support detection verification and incident investigation?',
+    approach:
+      'Create a platform concept for log review workflows: filter and pivot across events, group by entity, and extract timelines that help confirm suspicious activity or rule out false positives.',
+    technologies: ['Log review workflows', 'Timeline reconstruction (concepts)', 'Entity grouping', 'Detection verification patterns'],
+    outcome:
+      'A clear method to analyze logs with investigation intent—faster triage, better evidence organization, and improved incident reconstruction quality.',
+    lessons:
+      'Filtering is not enough; analysts need narrative-building tools. A timeline view is often the difference between confusion and clarity.',
+    improve:
+      'Add stronger support for hypothesis testing and evidence scoring. Expand into a feature set that would scale across larger log volumes.'
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section" aria-label="Projects">
+    <div class="section-head">
+      <h1>Projects</h1>
+      <p class="lead">Three case studies designed around SOC operations, monitoring, triage, and investigation outcomes.</p>
+    </div>
+
+    <div class="cards">
+      {projects.map((p) => (
+        <article class="card">
+          <h2>{p.title}</h2>
+
+          <div class="meta">
+            <div class="meta__item"><strong>Problem</strong></div>
+            <p class="text">{p.problem}</p>
+
+            <div class="meta__item"><strong>Approach</strong></div>
+            <p class="text">{p.approach}</p>
+
+            <div class="meta__item"><strong>Technologies Used</strong></div>
+            <ul class="chips">
+              {p.technologies.map((t) => (
+                <li class="chip">{t}</li>
+              ))}
+            </ul>
+
+            <div class="meta__item"><strong>Outcome</strong></div>
+            <p class="text">{p.outcome}</p>
+
+            <div class="meta__item"><strong>Lessons Learned</strong></div>
+            <p class="text">{p.lessons}</p>
+
+            <div class="meta__item"><strong>What I Would Improve</strong></div>
+            <p class="text">{p.improve}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .section {
+      padding: var(--space-6) 0;
+    }
+
+    .section-head {
+      margin-bottom: var(--space-5);
+    }
+
+    h1 {
+      margin: 0 0 var(--space-2);
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: var(--fs-600);
+      max-width: 75ch;
+    }
+
+    .cards {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 1024px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+    }
+
+    .card h2 {
+      margin: 0 0 var(--space-3);
+    }
+
+    .meta__item {
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-2);
+      color: var(--color-text);
+    }
+
+    .text {
+      margin: 0 0 var(--space-3);
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+
+    .chips {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--space-3);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .chip {
+      border: 1px solid var(--color-border);
+      background: rgba(11, 15, 23, 0.4);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      color: var(--color-muted);
+      font-weight: 650;
+      font-size: var(--fs-400);
+    }
+  </style>
+</BaseLayout>
+

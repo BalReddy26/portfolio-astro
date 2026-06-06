@@ -1,0 +1,18 @@
+name = "portfolio-astro"
+main = "src/api/contact.ts"
+compatibility_date = "2024-01-01"
+
+# Build output from Astro static site is handled by the static hosting path.
+# This worker config supports the API endpoint(s) exported from src/api/*.ts.
+
+workers_dev = false
+
+[observability]
+enable = true
+
+# Required for wrangler static asset handling.
+# If you later add `public/build` or custom assets build step, update `assets`.
+[assets]
+"public" = { directory = "public", binding = "ASSETS" }
+
+

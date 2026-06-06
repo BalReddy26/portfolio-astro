@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Bal Reddy — Cyber Security Portfolio';
+const description = 'Cyber Security Graduate, aspiring SOC Analyst. Skills in SOC operations, SIEM monitoring, incident response, and threat detection.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="hero">
+    <div class="hero__grid">
+      <div>
+        <p class="badge">SOC • SIEM • Incident Response</p>
+        <h1>Bal Reddy — building security visibility from alerts to outcomes.</h1>
+        <p class="lead">
+          Cyber Security Graduate and aspiring SOC Analyst focused on threat detection, incident response, and
+          Security Operations Center (SOC) operations.
+        </p>
+
+        <div class="cta-row" role="group" aria-label="Primary actions">
+          <a class="button" href="/projects">
+            <span aria-hidden="true">⌁</span> View Case Studies
+          </a>
+          <a class="button button--secondary" href="/contact">
+            Contact Me
+          </a>
+        </div>
+
+        <div class="hero__meta" aria-label="Quick interests">
+          <div class="meta-item">Threat Detection</div>
+          <div class="meta-item">Incident Response</div>
+          <div class="meta-item">Security Monitoring</div>
+        </div>
+      </div>
+
+      <aside class="hero__card" aria-label="Contact preview">
+        <h2 class="hero__card-title">Let’s talk security</h2>
+        <p class="hero__card-text">Need help understanding alerts, triage workflows, or detection-driven SOC operations?</p>
+        <a class="button button--wide" href="/contact">Open Contact Form</a>
+        <p class="hero__card-note">Response time: typically within 24–48 hours.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Skills overview">
+    <h2>Skills Overview</h2>
+    <div class="skills">
+      <div class="skill">Cyber Security</div>
+      <div class="skill">SOC Operations</div>
+      <div class="skill">SIEM Monitoring</div>
+      <div class="skill">Incident Response</div>
+      <div class="skill">Network Security</div>
+      <div class="skill">Linux</div>
+      <div class="skill">Cloud Fundamentals</div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Featured projects">
+    <div class="section-head">
+      <h2>Featured Projects</h2>
+      <a class="link-quiet" href="/projects">All case studies →</a>
+    </div>
+
+    <div class="cards" role="list">
+      <article class="card" role="listitem">
+        <h3>SOC Alert Investigation Lab</h3>
+        <p>From alert context to verified impact—built around practical triage steps.</p>
+        <a class="card__link" href="/projects">Read the case study</a>
+      </article>
+
+      <article class="card" role="listitem">
+        <h3>Vulnerability Assessment Dashboard</h3>
+        <p>Visibility-focused reporting for risk prioritization and remediation tracking.</p>
+        <a class="card__link" href="/projects">Read the case study</a>
+      </article>
+
+      <article class="card" role="listitem">
+        <h3>Security Log Analysis Platform</h3>
+        <p>Structured log review workflows for detection and incident reconstruction.</p>
+        <a class="card__link" href="/projects">Read the case study</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Contact call to action">
+    <div class="contact-cta">
+      <div>
+        <h2>Ready to collaborate?</h2>
+        <p class="muted">Send a message about SOC operations, SIEM monitoring, or security log analysis.</p>
+      </div>
+      <a class="button button--secondary" href="/contact">Go to Contact</a>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding: var(--space-5) 0 var(--space-7);
+    }
+
+    .hero__grid {
+      display: grid;
+      gap: var(--space-5);
+      align-items: start;
+    }
+
+    @media (min-width: 768px) {
+      .hero__grid {
+        grid-template-columns: 1.4fr 1fr;
+      }
+    }
+
+    h1 {
+      margin-top: var(--space-3);
+      margin-bottom: var(--space-3);
+    }
+
+    .lead {
+      color: var(--color-muted);
+      font-size: var(--fs-600);
+      margin: 0 0 var(--space-4);
+      max-width: 52ch;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+    }
+
+    .button--secondary {
+      background: transparent;
+    }
+
+    .button--wide {
+      width: 100%;
+      justify-content: center;
+      margin-top: var(--space-3);
+    }
+
+    .hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+
+    .meta-item {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      padding: 0.45rem 0.75rem;
+      border-radius: var(--radius-sm);
+      color: var(--color-muted);
+      font-weight: 650;
+      font-size: var(--fs-400);
+    }
+
+    .hero__card {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero__card-title {
+      font-size: var(--fs-700);
+      margin-bottom: var(--space-2);
+    }
+
+    .hero__card-text {
+      color: var(--color-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .hero__card-note {
+      margin-top: var(--space-3);
+      color: var(--color-muted);
+      font-size: var(--fs-400);
+    }
+
+    .section {
+      padding: var(--space-6) 0;
+    }
+
+    .section h2 {
+      margin-bottom: var(--space-4);
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+
+    @media (min-width: 768px) {
+      .skills {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .skill {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-sm);
+      padding: var(--space-2);
+      font-weight: 650;
+      color: var(--color-text);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+    }
+
+    .link-quiet {
+      color: var(--color-accent-2);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .link-quiet:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .cards {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .card {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      min-height: 180px;
+    }
+
+    .card h3 {
+      font-size: var(--fs-700);
+      margin-bottom: var(--space-2);
+    }
+
+    .card p {
+      color: var(--color-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .card__link {
+      color: var(--color-accent-2);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .card__link:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .contact-cta {
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: rgba(15, 22, 35, 0.35);
+      padding: var(--space-4);
+      display: flex;
+      gap: var(--space-4);
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .muted {
+      color: var(--color-muted);
+    }
+  </style>
+</BaseLayout>
+

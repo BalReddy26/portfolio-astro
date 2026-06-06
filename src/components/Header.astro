@@ -1,0 +1,95 @@
+---
+const { brand = 'Bal Reddy', navItems = [] } = Astro.props as {
+  brand?: string;
+  navItems?: Array<{ href: string; label: string }>;
+};
+---
+<header class="site-header" aria-label="Site header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label={`${brand} home`}>
+      <span class="brand__mark" aria-hidden="true">⌁</span>
+      <span class="brand__text">{brand}</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <ul class="nav__list">
+        {navItems.map((item) => (
+          <li class="nav__item">
+            <a class="nav__link" href={item.href} aria-current={item.href === Astro.url.pathname ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <style>
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 15, 23, 0.72);
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: var(--space-2) 0;
+        gap: var(--space-3);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: var(--color-text);
+        font-weight: 700;
+      }
+
+      .brand__mark {
+        color: var(--color-accent);
+        font-size: 1.2rem;
+      }
+
+      .brand__text {
+        letter-spacing: 0.2px;
+      }
+
+      .nav {
+        display: none;
+      }
+
+      @media (min-width: 768px) {
+        .nav {
+          display: block;
+        }
+      }
+
+      .nav__list {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav__link {
+        color: var(--color-muted);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .nav__link:hover {
+        color: var(--color-text);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+    </style>
+  </div>
+</header>
+

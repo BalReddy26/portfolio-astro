@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Contact — Bal Reddy';
+const description = 'Send a message to Bal Reddy. This form includes validation and accessible status updates.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section" aria-label="Contact form">
+    <div class="section-head">
+      <h1>Contact</h1>
+      <p class="lead">Have a SOC question, SIEM monitoring topic, or security log challenge? Send a message below.</p>
+    </div>
+
+    <form class="form" id="contactForm" novalidate>
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="100" />
+        <div class="field__error" data-error-for="name" aria-live="polite"></div>
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required />
+        <div class="field__error" data-error-for="email" aria-live="polite"></div>
+      </div>
+
+      <div class="field">
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" required minlength="3" maxlength="150" />
+        <div class="field__error" data-error-for="subject" aria-live="polite"></div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required minlength="10" maxlength="2000"></textarea>
+        <div class="field__error" data-error-for="message" aria-live="polite"></div>
+      </div>
+
+      <div class="form__status" aria-live="polite" role="status" aria-atomic="true" data-status>
+        <div class="status status--idle">Fill in the form and press send.</div>
+        <div class="status status--loading" hidden>Sending…</div>
+        <div class="status status--success" hidden>
+          Message sent successfully (placeholder).
+        </div>
+        <div class="status status--error" hidden>
+          Something went wrong (placeholder).
+        </div>
+      </div>
+
+      <button class="button" type="submit" data-submit>
+        <span aria-hidden="true">⌁</span> Send message
+      </button>
+    </form>
+  </section>
+
+  <script is:inline>
+    // Phase 4 will connect this to /api/contact.
+    // For Phase 3 we provide UX states and client-side validation wiring.
+    const form = document.getElementById('contactForm');
+    const statusRoot = form.querySelector('[data-status]');
+    const submitBtn = form.querySelector('[data-submit]');
+
+    function setStatus(kind) {
+      const statuses = statusRoot.querySelectorAll('.status');
+      statuses.forEach((el) => (el.hidden = true));
+      const target = statusRoot.querySelector('.status--' + kind);
+      if (target) target.hidden = false;
+    }
+
+    function setFieldError(name, msg) {
+      const el = form.querySelector('[data-error-for="' + name + '"]');
+      if (!el) return;
+      el.textContent = msg || '';
+    }
+
+    function validate(values) {
+      const errors = {};
+      if (!values.name || values.name.trim().length < 2 || values.name.trim().length > 100) {
+        errors.name = 'Name is required (2–100 characters).';
+      }
+
+      const email = values.email?.trim() || '';
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!email || !emailOk) {
+        errors.email = 'Enter a valid email address.';
+      }
+
+      if (!values.subject || values.subject.trim().length < 3 || values.subject.trim().length > 150) {
+        errors.subject = 'Subject is required (3–150 characters).';
+      }
+
+      const message = values.message || '';
+      if (!message || message.trim().length < 10 || message.trim().length > 2000) {
+        errors.message = 'Message is required (10–2000 characters).';
+      }
+
+      return errors;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      ['name', 'email', 'subject', 'message'].forEach((k) => setFieldError(k, ''));
+
+      const values = {
+        name: form.name.value,
+        email: form.email.value,
+        subject: form.subject.value,
+        message: form.message.value
+      };
+
+      const errors = validate(values);
+      if (Object.keys(errors).length) {
+        setStatus('idle');
+        for (const [k, msg] of Object.entries(errors)) setFieldError(k, msg);
+        setStatus('error');
+        return;
+      }
+
+      try {
+        setStatus('loading');
+        submitBtn.disabled = true;
+
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(values)
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data?.success) {
+          setStatus('success');
+          form.reset();
+        } else {
+          setStatus('error');
+        }
+      } catch {
+        setStatus('error');
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    setStatus('idle');
+  </script>
+
+  <style>
+    .section {
+      padding: var(--space-6) 0;
+    }
+
+    .section-head {
+      margin-bottom: var(--space-5);
+    }
+
+    h1 {
+      margin: 0 0 var(--space-2);
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: var(--fs-600);
+      max-width: 75ch;
+    }
+
+    .form {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      max-width: 760px;
+    }
+
+    .field {
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: var(--space-4);
+    }
+
+    label {
+      font-weight: 750;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      padding: 0.7rem 0.9rem;
+      background: rgba(11, 15, 23, 0.55);
+      color: var(--color-text);
+      outline: none;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(102, 163, 255, 0.65);
+    }
+
+    .field__error {
+      min-height: 1.1rem;
+      color: rgba(255, 115, 115, 0.95);
+      font-size: var(--fs-400);
+      font-weight: 650;
+    }
+
+    .form__status {
+      margin: var(--space-4) 0;
+      padding: var(--space-3);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: rgba(11, 15, 23, 0.35);
+      color: var(--color-muted);
+    }
+
+    .status--success {
+      color: rgba(92, 255, 160, 0.9);
+      font-weight: 700;
+    }
+
+    .status--error {
+      color: rgba(255, 115, 115, 0.95);
+      font-weight: 700;
+    }
+
+    button[type='submit'] {
+      margin-top: var(--space-2);
+    }
+  </style>
+</BaseLayout>
+

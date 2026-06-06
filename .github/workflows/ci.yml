@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+    branches-ignore:
+      - main
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: portfolio-astro/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: portfolio-astro
+
+      - name: Lint (if configured)
+        run: npm run lint
+        working-directory: portfolio-astro
+        continue-on-error: true
+
+      - name: TypeScript type check
+        run: npx tsc -p tsconfig.json --noEmit
+        working-directory: portfolio-astro
+
+      - name: Vitest tests
+        run: npm test
+        working-directory: portfolio-astro
+
+      - name: Build Astro site
+        run: npm run build
+        working-directory: portfolio-astro
+

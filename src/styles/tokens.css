@@ -1,0 +1,84 @@
+:root {
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+
+  --fs-900: 1.75rem;
+  --fs-800: 1.375rem;
+  --fs-700: 1.125rem;
+  --fs-600: 1rem;
+  --fs-500: 0.9375rem;
+  --fs-400: 0.875rem;
+  --fs-300: 0.8125rem;
+
+  --lh-body: 1.6;
+  --lh-heading: 1.2;
+
+  /* Spacing (mobile-first, 8px grid-ish) */
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 2.5rem;
+  --space-7: 3rem;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+
+  /* Theme defaults use “secure console” palette. */
+  --color-bg: #0b0f17;
+  --color-surface: #0f1623;
+  --color-text: #e8edf6;
+  --color-muted: #aab4c7;
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  --color-accent: #39ff88;
+  --color-accent-2: #66a3ff;
+
+  --color-danger: #ff4d6d;
+
+  --color-focus: #66a3ff;
+
+  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Data-driven theming */
+[data-theme="light"] {
+  /* Keep same secure-console palette for consistency and contrast. */
+  --color-bg: #0b0f17;
+  --color-surface: #0f1623;
+  --color-text: #e8edf6;
+  --color-muted: #aab4c7;
+  --color-border: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] {
+  --color-bg: #0b0f17;
+  --color-surface: #0f1623;
+  --color-text: #e8edf6;
+  --color-muted: #aab4c7;
+  --color-border: rgba(255, 255, 255, 0.12);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    /* Default when user prefers light */
+    --color-bg: #0b0f17;
+    --color-surface: #0f1623;
+    --color-text: #e8edf6;
+    --color-muted: #aab4c7;
+    --color-border: rgba(255, 255, 255, 0.12);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg: #0b0f17;
+    --color-surface: #0f1623;
+    --color-text: #e8edf6;
+    --color-muted: #aab4c7;
+    --color-border: rgba(255, 255, 255, 0.12);
+  }
+}
+

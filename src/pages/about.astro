@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'About — Bal Reddy';
+const description = 'Cyber Security Graduate and aspiring SOC Analyst. Goals in threat detection, incident response, and Security Operations Center (SOC) operations.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section">
+    <div class="section-head">
+      <h1>About Bal Reddy</h1>
+      <p class="lead">Cyber Security Graduate • Aspiring SOC Analyst • Threat detection & incident response focused</p>
+    </div>
+
+    <div class="grid grid--2">
+      <article class="panel">
+        <h2>Personal introduction</h2>
+        <p>
+          I’m Bal Reddy, a Cyber Security Graduate who’s actively building skills for real-world SOC operations.
+          My interests include threat detection, incident response, and improving how analysts interpret signals
+          and turn them into measurable outcomes.
+        </p>
+        <p>
+          I enjoy learning cloud fundamentals and SIEM workflows—especially how monitoring, alert triage, and
+          investigation patterns connect together.
+        </p>
+      </article>
+
+      <article class="panel">
+        <h2>Career goal</h2>
+        <p>
+          My goal is to become a SOC Analyst who can support Security Operations Center workflows end-to-end:
+          detection engineering fundamentals, triage, escalation, incident reconstruction, and post-incident
+          improvements.
+        </p>
+        <p class="muted">
+          I’m particularly focused on mastering SOC operations, SIEM monitoring, incident response processes,
+          and practical network security concepts.
+        </p>
+      </article>
+    </div>
+
+    <div class="grid grid--2">
+      <article class="panel">
+        <h2>Technical skills</h2>
+        <ul class="list">
+          <li>Cyber Security</li>
+          <li>SOC Operations</li>
+          <li>SIEM Monitoring</li>
+          <li>Incident Response</li>
+          <li>Network Security</li>
+          <li>Linux</li>
+          <li>Cloud Fundamentals</li>
+        </ul>
+      </article>
+
+      <article class="panel">
+        <h2>Education</h2>
+        <p><strong>Cyber Security Graduate</strong></p>
+        <p class="muted">Details can be expanded with your exact institution, year, and coursework.</p>
+        <hr />
+        <h3>Certifications</h3>
+        <p class="muted">Placeholder: add certifications as you complete them (e.g., Security+, SOC-focused certs, or cloud security training).</p>
+      </article>
+    </div>
+
+    <article class="panel timeline" aria-label="Career roadmap">
+      <h2>Roadmap (what I’m building next)</h2>
+      <ol class="timeline__list">
+        <li>
+          <strong>Threat Detection Thinking</strong>
+          <p class="muted">Improve understanding of alert context, detection logic, and investigation workflows.</p>
+        </li>
+        <li>
+          <strong>SIEM Monitoring & Triage</strong>
+          <p class="muted">Practice alert prioritization, correlation concepts, and operational readiness.</p>
+        </li>
+        <li>
+          <strong>Incident Response</strong>
+          <p class="muted">Build structured investigation steps: evidence handling, timeline reconstruction, and lessons learned.</p>
+        </li>
+        <li>
+          <strong>SOC Operations</strong>
+          <p class="muted">Strengthen documentation habits, escalation communication, and continuous improvement loops.</p>
+        </li>
+      </ol>
+    </article>
+  </section>
+
+  <style>
+    .section {
+      padding: var(--space-6) 0;
+    }
+
+    h1 {
+      margin: 0 0 var(--space-3);
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-bottom: var(--space-5);
+    }
+
+    .lead {
+      color: var(--color-muted);
+      font-size: var(--fs-600);
+      max-width: 70ch;
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .grid--2 {
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .grid--2 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .panel {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+    }
+
+    .panel h2 {
+      margin: 0 0 var(--space-3);
+    }
+
+    .panel p {
+      color: var(--color-text);
+      line-height: 1.7;
+      margin: 0 0 var(--space-3);
+    }
+
+    .muted {
+      color: var(--color-muted);
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--color-text);
+    }
+
+    .list li {
+      margin: 0 0 0.6rem;
+      color: var(--color-text);
+    }
+
+    .timeline__list {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .timeline__list li {
+      margin: 0 0 var(--space-3);
+    }
+
+    .timeline__list p {
+      margin: var(--space-2) 0 0;
+    }
+  </style>
+</BaseLayout>
+

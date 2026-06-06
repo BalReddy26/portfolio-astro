@@ -1,0 +1,84 @@
+---
+const { storageKey = 'theme' } = Astro.props as { storageKey?: string };
+---
+<button
+  class="theme-toggle"
+  type="button"
+  aria-pressed="false"
+  aria-label="Toggle theme (light/dark)"
+  data-storage-key={storageKey}
+>
+  <span class="theme-toggle__icon" aria-hidden="true">◐</span>
+  <span class="theme-toggle__text">Theme</span>
+</button>
+
+<script is:inline>
+  const STORAGE_KEY = document.currentScript?.getAttribute('data-storage-key') || 'theme';
+
+  const root = document.documentElement;
+
+  function getPreferredTheme() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+
+    const btn = document.querySelector('[data-storage-key="' + STORAGE_KEY + '"]');
+    if (btn) {
+      btn.setAttribute('aria-pressed', String(theme === 'dark'));
+      btn.dataset.theme = theme;
+    }
+
+    // Update meta color-scheme for form controls.
+    root.style.colorScheme = theme;
+  }
+
+  function toggleTheme() {
+    const current = root.getAttribute('data-theme') || getPreferredTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+    localStorage.setItem(STORAGE_KEY, next);
+    applyTheme(next);
+  }
+
+  const initial = getPreferredTheme();
+  applyTheme(initial);
+
+  document.addEventListener('click', (e) => {
+    const btn = e.target?.closest?.('[data-storage-key="' + STORAGE_KEY + '"]');
+    if (!btn) return;
+    toggleTheme();
+  });
+</script>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .theme-toggle__icon {
+    color: var(--color-accent);
+  }
+
+  .theme-toggle__text {
+    font-size: var(--fs-400);
+  }
+
+  @media (max-width: 767px) {
+    .theme-toggle__text {
+      display: none;
+    }
+  }
+</style>
+

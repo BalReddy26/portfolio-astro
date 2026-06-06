@@ -1,0 +1,38 @@
+---
+export type NavLink = { href: string; label: string };
+
+const { items = [] } = Astro.props as { items?: NavLink[] };
+---
+<nav aria-label="Primary">
+  <ul class="nav-list">
+    {items.map((item) => (
+      <li class="nav-item">
+        <a class="nav-link" href={item.href}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    color: var(--color-muted);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
+

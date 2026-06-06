@@ -1,0 +1,24 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export type BlogLayoutProps = {
+  title?: string;
+  description?: string;
+  children: any;
+};
+
+const { title = 'Blog', description, children } = Astro.props as BlogLayoutProps;
+---
+<BaseLayout title={title} description={description ?? 'Posts and notes.'}>
+  <div class="blog-layout">
+    {children}
+  </div>
+
+  <style>
+    .blog-layout {
+      display: grid;
+      gap: var(--space-4);
+    }
+  </style>
+</BaseLayout>
+

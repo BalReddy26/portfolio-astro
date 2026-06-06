@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page Not Found — Bal Reddy';
+const description = 'This page could not be found. Return to the homepage and explore security-focused case studies.';
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section" aria-label="404 not found">
+    <div class="panel">
+      <h1>404 — Page Not Found</h1>
+      <p class="lead">Looks like that page doesn’t exist. But you can still explore security case studies and blog posts.</p>
+
+      <div class="actions" role="group" aria-label="404 navigation">
+        <a class="button" href="/">Return Home</a>
+        <a class="button button--secondary" href="/projects">Browse Projects</a>
+      </div>
+
+      <div class="search-suggest" aria-label="Search suggestion">
+        <h2>Search suggestion</h2>
+        <p class="muted">Try searching for keywords like “SOC”, “SIEM”, “incident response”, or “log analysis”.</p>
+        <p class="muted">(Search UI can be added later; this is a friendly placeholder.)</p>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .section {
+      padding: var(--space-6) 0;
+    }
+
+    .panel {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 var(--space-3);
+    }
+
+    .lead {
+      margin: 0 0 var(--space-4);
+      color: var(--color-muted);
+      font-size: var(--fs-600);
+      max-width: 70ch;
+      line-height: 1.7;
+    }
+
+    .actions {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-5);
+    }
+
+    .search-suggest {
+      border-top: 1px solid var(--color-border);
+      padding-top: var(--space-4);
+    }
+
+    .search-suggest h2 {
+      margin: 0 0 var(--space-2);
+      font-size: var(--fs-700);
+    }
+
+    .muted {
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+  </style>
+</BaseLayout>
+

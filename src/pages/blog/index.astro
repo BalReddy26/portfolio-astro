@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Blog — Bal Reddy';
+const description = 'Personal notes on SOC analysis, threat detection thinking, and common security mistakes in modern web applications.';
+
+// In Phase 3 we’ll keep blog rendering minimal and stable.
+// Markdown content will be added via Astro content collections in Phase 4.
+const posts = [
+  {
+    title: 'My Journey Toward Becoming a SOC Analyst',
+    href: '/blog/my-journey-toward-becoming-a-soc-analyst',
+    date: '2026-01-01',
+    summary:
+      'A personal, realistic look at learning SOC workflows, building investigation habits, and turning alerts into evidence-based conclusions.'
+  },
+  {
+    title: '5 Common Security Mistakes in Modern Web Applications',
+    href: '/blog/5-common-security-mistakes-in-modern-web-applications',
+    date: '2026-01-15',
+    summary:
+      'A practical walkthrough of mistakes developers make in auth, input handling, configuration, and how to prevent them.'
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="section" aria-label="Blog listing">
+    <div class="section-head">
+      <h1>Blog</h1>
+      <p class="lead">Short posts written in a personal tone, focused on security operations and practical lessons.</p>
+    </div>
+
+    <div class="cards" role="list">
+      {posts.map((p) => (
+        <article class="card" role="listitem">
+          <h2 class="card__title">{p.title}</h2>
+          <p class="card__meta">{p.date}</p>
+          <p class="card__summary">{p.summary}</p>
+          <a class="card__link" href={p.href}>Read post →</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .section {
+      padding: var(--space-6) 0;
+    }
+
+    .section-head {
+      margin-bottom: var(--space-5);
+    }
+
+    h1 {
+      margin: 0 0 var(--space-2);
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--color-muted);
+      font-size: var(--fs-600);
+      max-width: 75ch;
+    }
+
+    .cards {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .card {
+      border: 1px solid var(--color-border);
+      background: rgba(15, 22, 35, 0.35);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+    }
+
+    .card__meta {
+      margin: var(--space-2) 0 var(--space-3);
+      color: var(--color-muted);
+      font-size: var(--fs-400);
+    }
+
+    .card__summary {
+      color: var(--color-muted);
+      line-height: 1.7;
+      margin: 0 0 var(--space-3);
+    }
+
+    .card__link {
+      color: var(--color-accent-2);
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .card__link:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  </style>
+</BaseLayout>
+

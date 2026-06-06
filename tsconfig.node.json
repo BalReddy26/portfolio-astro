@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "moduleResolution": "Node",
+    "types": ["node"]
+  },
+  "include": [
+    "astro.config.mjs",
+    "vitest.config.ts"
+  ]
+}
+
