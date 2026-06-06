@@ -5,7 +5,7 @@ compatibility_date = "2024-01-01"
 # Build output from Astro static site is handled by the static hosting path.
 # This worker config supports the API endpoint(s) exported from src/api/*.ts.
 
-workers_dev = false
+workers_dev = true
 
 [observability]
 enable = true
